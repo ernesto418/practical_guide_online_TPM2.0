@@ -17,4 +17,4 @@ tpm2_getrandom 8
 
 You did it? Nice! Then let' start!
 
-Start with the first course!
+Start with the first [course](Create_keys.md)!
