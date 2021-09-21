@@ -14,13 +14,17 @@ They are generated using a pseudoramdon algorimts using always the same seed of 
 
 So let create first the primary key:
 
+```
 tpm2_createprimary -c primary.ctx
+```
 
 Whith this command we are creating the primary and leaving several options in default.
 
 Now that we have this volatile key that we can recreate when needed, we can use it to wrap our ECC 256 key :D
 
+```
 [tpm2_create](https://github.com/tpm2-software/tpm2-tools/blob/master/man/tpm2_create.1.md) -C primary.ctx -G ecc256 -u obj.pub -r obj.priv
+```
 
 Congrats, we have created a key inside the TPM!!.
 
