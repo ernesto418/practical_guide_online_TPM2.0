@@ -12,7 +12,7 @@ The first keys in the [Key Hierarchies](https://github.com/tpm2dev/tpm.dev.tutor
 They are generated using a pseudoramdon algorimts using always the same seed of the TPM ([well, not always, but that is another topic ;)](include_reference)), therefore, we can generate this primary key, destroy it and generete in the future exactly the same primary key
 ([we can also store it in the NV memory of the TPM](include_reference)).
 
-So let create first the primary key:
+So let create first the primary key with [tpm2_createprimary](https://github.com/tpm2-software/tpm2-tools/blob/master/man/tpm2_createprimary.1.md):
 
 ```
 tpm2_createprimary -c primary.ctx
@@ -20,10 +20,10 @@ tpm2_createprimary -c primary.ctx
 
 Whith this command we are creating the primary and leaving several options in default.
 
-Now that we have this volatile key that we can recreate when needed, we can use it to wrap our ECC 256 key :D
+Now that we have this volatile key that we can recreate when needed, we can use it to wrap our ECC 256 key :D. Let's finally create our key with [tpm2_create](https://github.com/tpm2-software/tpm2-tools/blob/master/man/tpm2_create.1.md)
 
 ```
-[tpm2_create](https://github.com/tpm2-software/tpm2-tools/blob/master/man/tpm2_create.1.md) -C primary.ctx -G ecc256 -u obj.pub -r obj.priv
+tpm2_create -C primary.ctx -G ecc256 -u obj.pub -r obj.priv
 ```
 
 Congrats, we have created a key inside the TPM!!.
