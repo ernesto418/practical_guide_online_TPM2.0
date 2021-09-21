@@ -34,7 +34,7 @@ As you can see, we are providing 4 inputs:
 
 -G  Algorithm for our key
 
--u The path where store the [public portion](include_reference) of our key, here we can find some public information of our key that is not wrapped, like its [atributes](include_reference) or the public key
+-u The path where store the [public portion](include_reference) of our key, here we can find some public information of our key that is not wrapped, like its [atributes](include_reference) or the public key (Warning: it is  not encrpted, but its integrity is protected and it is still needed to use our private key)
 
 -r The path where store the [private portion of our key](include_reference) that is wraped by the primary key. It can only be read by the TPM ,well, if it has the correct atributes, that is why it is very important learn about them,
 but the current default attributes define that the key is alwys protected by the TPM.
