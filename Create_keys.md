@@ -31,13 +31,13 @@ Congrats, we have created a key inside the TPM!!.
 
 As you can see, we are providing 4 inputs:
 
--C  Refer to the key that is going to wrap your key, also known as the parent of our key
+**-C**  Refer to the key that is going to wrap your key, also known as the parent of our key
 
--G  Algorithm for our key
+**-G**  Algorithm for our key
 
--u The path where store the [public portion](include_reference) of our key, here we can find some public information of our key that is not wrapped, like its [atributes](include_reference) or the public key (Note: it is  not encrypted, but its integrity is protected and it is still needed to use our private key)
+**-u** The path where store the [public portion](include_reference) of our key, here we can find some public information of our key that is not wrapped, like its [atributes](include_reference) or the public key (Note: it is  not encrypted, but its integrity is protected and it is still needed to use our private key)
 
--r The path where store the [private portion of our key](include_reference) that is wrapped by the primary key. It can only be read by the TPM, well, if it has the correct attributes, that is why it is very important to learn about them,
+**-r** The path where store the [private portion of our key](include_reference) that is wrapped by the primary key. It can only be read by the TPM, well, if it has the correct attributes, that is why it is very important to learn about them,
 but the current default attributes define that the key is always protected by the TPM.
 
 The next step would be to do a signature with the key, go to the [next course](course_2) for it.
