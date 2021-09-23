@@ -8,13 +8,28 @@ To load a key into the TPM we need to provide the the parent key (the key that w
 then The TPM will be able to decrypted and load the private key in the TPM's volatile memory.
 
 ```
-tpm2_load  -C primary.ctx -u obj.pub -r obj.priv -c key.ctx
+tpm2_load  -C primary.ctx -u obj.pub -r obj.priv -c ECC-256.ctx
 ```
 
-If some time passed since you did the last course, may you need to regenerate the primary key before load the ECC-256 key. If you get an error, try with:
-
+If some time passed since you did the last course, you may need to regenerate the primary key before load the ECC-256 key. If you get an error, try with this command before load the key:
 
 ```
 tpm2_createprimary -c primary.ctx
 ```
 
+Before sing a message, we need to create a message:
+```
+echo "Hello world!, signed my private ECC-256 key" > message.dat
+```
+
+Now finally is time to sign:
+
+```
+tpm2_sign -c ECC-256.ctx -g sha256 -o signature.der message.dat
+```
+
+Now is time to know what we exactly did with this signature:
+
+**-c** The context of the key that we are going to use for signing. As it is already laoded in the TPM's V-memory we dont have to provide the private or the public portion of the key 
+
+**-g** It is the algorith useed hor hashiing the data, [here](https://github.com/tpm2-software/tpm2-tools/blob/master/man/common/alg.md#hashing-algorithms) you can find the different specifiers.
