@@ -19,13 +19,13 @@ tpm2_createprimary -c primary.ctx
 
 Before sing a message, we need to create a message:
 ```
-echo "Hello world!, signed my private ECC-256 key" > message.dat
+echo "Hello world!, signed my private ECC-256 key" > message
 ```
 
 Now finally is time to sign:
 
 ```
-tpm2_sign -c ECC-256.ctx -g sha256 -o signature.der message.dat
+tpm2_sign -c ECC-256.ctx -g sha256 -o signature.tss message
 ```
 
 Now is time to know what we exactly did with this signature:
@@ -38,3 +38,37 @@ Now is time to know what we exactly did with this signature:
 
 **Argument** Path with the data to sing
 
+## Now let's verify it:
+
+To verify it we just need to provide the key ctx used (**-c**), the hash used (**-g**), the signature (**-s**) and the message (**-m**).
+
+```
+tpm2_verifysignature -c ECC-256.ctx -g sha256 -s signature.tss -m message
+```
+
+If you do not recieve a error, the verification was great!. Now we are going to edit the message and try again the verrification.
+
+```
+echo "I hate you, world!, signed my private ECC-256 key" > message
+tpm2_verifysignature -c ECC-256.ctx -g sha256 -s signature.tss -m message
+```
+
+You should recieved (beetwen other things):
+
+```
+ERROR: Esys_VerifySignature(0x2DB) - tpm:parameter(2):the signature is not valid
+ERROR: Verify signature failed!
+```
+
+Nice!, but... what I do not want to verify it in a TPM? maybe with a commun sofware like Openssl? 
+
+## Verify with Openssl
+
+There is no much complication to verify a signature with Openssl, just type "verify signature with Openssl". The problem is that the output we have from the TPM taht are required to verify the signatures are not in the correct format to be used in Openssl. Becasue of that we need to aks the TPM to provide as the public key of ECC-256 in a PEM format and the signature in DER format, and then Openssl will be able to verify it.
+
+Let's start with the public key:
+
+```
+tpm2_print -t TPM2B_PUBLIC -f pem obj.pub
+
+```
