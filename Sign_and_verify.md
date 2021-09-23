@@ -70,7 +70,6 @@ Let's start with the public key:
 
 ```
 tpm2_print -t TPM2B_PUBLIC -f pem obj.pub >> ECC-256_PuB.pem
-
 ```
 
 [Note: current command does not work properly, issue open [here](https://github.com/tpm2-software/tpm2-tools/issues/2840)]
@@ -86,3 +85,6 @@ And now, we can verify it wit Openssl:
 ```
 openssl dgst -verify ECC-256_PuB.pem -keyform pem -sha256 -signature signature.der message
 ```
+
+
+In the next [course](insert_reference) we will sign data providing just the digest and we will introduce the first attribute, [restricted](insert_reference)
