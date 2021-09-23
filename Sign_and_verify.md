@@ -53,7 +53,7 @@ echo "I hate you, world!, signed my private ECC-256 key" > message_fake
 tpm2_verifysignature -c ECC-256.ctx -g sha256 -s signature.tss -m message_fake
 ```
 
-You should recieved (beetwen other things):
+You should recieved (among other things):
 
 ```
 ERROR: Esys_VerifySignature(0x2DB) - tpm:parameter(2):the signature is not valid
