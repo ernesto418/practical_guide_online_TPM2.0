@@ -17,7 +17,7 @@ If some time passed since you did the last course, you may need to regenerate th
 tpm2_createprimary -c primary.ctx
 ```
 
-Before sing a message, we need to create a message:
+Before signing a message, we need to create a message:
 ```
 echo "Hello world!, signed my private ECC-256 key" > message
 ```
@@ -36,7 +36,7 @@ Now is time to know what we exactly did with this signature:
 
 **-o** path where store the signature.
 
-**Argument** Path with the data to sing
+**Argument** Path with the data to sign.
 
 ## Now let's verify it:
 
