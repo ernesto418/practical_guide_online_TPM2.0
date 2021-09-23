@@ -60,7 +60,7 @@ ERROR: Esys_VerifySignature(0x2DB) - tpm:parameter(2):the signature is not valid
 ERROR: Verify signature failed!
 ```
 
-Nice!, but... what I do not want to verify it in a TPM? maybe with a commun sofware like Openssl? 
+Nice!, but... what if I do not want to verify it in a TPM? maybe I want to use a commun sofware like Openssl? 
 
 ## Verify with Openssl
 
