@@ -49,8 +49,8 @@ tpm2_verifysignature -c ECC-256.ctx -g sha256 -s signature.tss -m message
 If you do not recieve a error, the verification was great!. Now we are going to edit the message and try again the verrification.
 
 ```
-echo "I hate you, world!, signed my private ECC-256 key" > message
-tpm2_verifysignature -c ECC-256.ctx -g sha256 -s signature.tss -m message
+echo "I hate you, world!, signed my private ECC-256 key" > message_fake
+tpm2_verifysignature -c ECC-256.ctx -g sha256 -s signature.tss -m message_fake
 ```
 
 You should recieved (beetwen other things):
@@ -69,6 +69,20 @@ There is no much complication to verify a signature with Openssl, just type "ver
 Let's start with the public key:
 
 ```
-tpm2_print -t TPM2B_PUBLIC -f pem obj.pub
+tpm2_print -t TPM2B_PUBLIC -f pem obj.pub >> ECC-256_PuB.pem
 
+```
+
+[Note: current command does not work properly, issue open [here](https://github.com/tpm2-software/tpm2-tools/issues/2840)]
+
+And now, get our signature in der format, we can specify the format of the public key with **-f** and select the [specifier](https://github.com/tpm2-software/tpm2-tools/blob/master/man/common/signature.md) we prefer:
+
+```
+tpm2_sign -c ECC-256.ctx -g sha256 -f plain -o signature.der message
+```
+
+And now, we can verify it wit Openssl:
+
+```
+openssl dgst -verify ECC-256_PuB.pem -keyform pem -sha256 -signature signature.der message
 ```
