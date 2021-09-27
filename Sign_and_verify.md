@@ -72,8 +72,6 @@ Let's start with the public key:
 tpm2_print -t TPM2B_PUBLIC -f pem obj.pub >> ECC-256_PuB.pem
 ```
 
-[Note: current command does not work properly, issue open [here](https://github.com/tpm2-software/tpm2-tools/issues/2840)]
-
 And now, get our signature in der format, we can specify the format of the public key with **-f** and select the [specifier](https://github.com/tpm2-software/tpm2-tools/blob/master/man/common/signature.md) we prefer:
 
 ```
